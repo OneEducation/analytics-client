@@ -22,9 +22,7 @@ package org.OneEducation.HarvestClient;
 import android.app.Activity;
 import android.os.Bundle;
 import android.content.Intent;
-
-import org.OneEducation.HarvestClient.HarvestService;
-
+import android.view.View;
 
 public class HarvestActivity extends Activity
 {
@@ -34,6 +32,15 @@ public class HarvestActivity extends Activity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+
+        View okButton = findViewById(R.id.okbutton);
+        okButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
         launchService();
     }
 
