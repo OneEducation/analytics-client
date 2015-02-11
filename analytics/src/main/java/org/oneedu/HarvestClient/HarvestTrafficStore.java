@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 Martin Abente Lahaye - martin.abente.lahaye@gmail.com.
+ * Copyright (C) 2015 Martin Abente Lahaye - martin.abente.lahaye@gmail.com.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
  * USA
  */
 
-package org.OneEducation.HarvestClient;
+package org.oneedu.HarvestClient;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -32,80 +32,88 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import org.OneEducation.HarvestClient.HarvestEntry;
+import org.oneedu.HarvestClient.HarvestTrafficEntry;
 
-public class HarvestStore extends SQLiteOpenHelper {
 
-    private static final Integer DATABASE_VERSION = 4;
+public class HarvestTrafficStore extends SQLiteOpenHelper {
 
-    private static final String DATABASE_NAME = "harvest";
+    private static final String TAG = "HarvestTrafficStore";
+    private static final Integer DATABASE_VERSION = 1;
+    private static final String DATABASE_NAME = "traffic";
 
     private String QUERY_CREATE = "CREATE TABLE IF NOT EXISTS " +
                                   "entries " +
-                                  "(package TEXT, " +
-				  "started INTEGER, " +
-                                  "duration INTEGER, " +
-                                  "PRIMARY KEY (package, started))";
+                                  "(started INTEGER, " +
+				  "received INTEGER, " +
+                                  "transmitted INTEGER, " +
+                                  "PRIMARY KEY (started))";
 
     private String QUERY_DROP = "DROP TABLE IF EXISTS entries";
 
-    private String QUERY_FIND = "SELECT * FROM entries WHERE package = ? AND started = ?";
+    private String QUERY_FIND = "SELECT * FROM entries WHERE started = ?";
 
     private String QUERY_SELECT = "SELECT * FROM entries WHERE started >= ?";
 
     private String TABLE_NAME = "entries";
-    private String COLUMN_PACKAGE = "package";
     private String COLUMN_STARTED = "started";
-    private String COLUMN_DURATION = "duration";
+    private String COLUMN_RECEIVED = "received";
+    private String COLUMN_TRANSMITTED = "transmitted";
 
-    public HarvestStore(Context context){
+    public HarvestTrafficStore(Context context){
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        Log.i("HarvestStore", "created");
+        Log.i(TAG, "created");
         db.execSQL(QUERY_CREATE);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        Log.i("HarvestStore", "onUpgrade");
+        Log.i(TAG, "onUpgrade");
         db.execSQL(QUERY_DROP);
         this.onCreate(db);
     }
 
-    public void persist(HarvestEntry entry) {
-        Log.d("HarvestStore", "persist");
+    public void persist(Long started, Long received, Long transmitted) {
+        Log.d(TAG, "persist");
         SQLiteDatabase db = this.getWritableDatabase();
 
-        Long previousDuration = 0L;
-        Cursor cursor = db.rawQuery(QUERY_FIND, new String[] {entry.packageName, entry.started.toString()});
+        Long previousReceived = 0L;
+        Long previousTransmitted = 0L;
+
+        Cursor cursor = db.rawQuery(QUERY_FIND, new String[] {started.toString()});
         if (cursor.moveToFirst()) {
-           previousDuration = Long.parseLong(cursor.getString(2), 10);
+           previousReceived = Long.parseLong(cursor.getString(1), 10);
+           previousTransmitted = Long.parseLong(cursor.getString(2), 10);
         }
-        cursor.close(); 
+        cursor.close();
 
         ContentValues values = new ContentValues();
-        values.put(COLUMN_PACKAGE, entry.packageName);
-        values.put(COLUMN_STARTED, entry.started);
-        values.put(COLUMN_DURATION, entry.duration + previousDuration); 
+        values.put(COLUMN_STARTED, started);
+        values.put(COLUMN_RECEIVED, received + previousReceived);
+        values.put(COLUMN_TRANSMITTED, transmitted + previousTransmitted);
 
         db.replace(TABLE_NAME, null, values);
         db.close();
     }
 
-    public List<HarvestEntry> retrieve(Long started) {
-        Log.d("HarvestStore", "retrieve");
-        List<HarvestEntry> entries = new ArrayList<HarvestEntry>();
+    public List<HarvestTrafficEntry> retrieve(Long started) {
+        Log.d(TAG, "retrieve");
+
+        List<HarvestTrafficEntry> entries = new ArrayList<HarvestTrafficEntry>();
         SQLiteDatabase db = this.getWritableDatabase();
 
         Cursor cursor = db.rawQuery(QUERY_SELECT, new String[] {started.toString()});
         if (cursor.moveToFirst()) {
             do {
-                HarvestEntry entry = new HarvestEntry(cursor.getString(0));
-                entry.started = Long.parseLong(cursor.getString(1), 10);
-                entry.duration = Long.parseLong(cursor.getString(2), 10);
+                HarvestTrafficEntry entry = new HarvestTrafficEntry();
+                entry.started = Long.parseLong(cursor.getString(0), 10);
+                entry.received = Long.parseLong(cursor.getString(1), 10);
+                entry.transmitted = Long.parseLong(cursor.getString(2), 10);
+
+                Log.d(TAG, String.format("retrieve: %d %d %d", entry.started, entry.received, entry.transmitted));
 
                 entries.add(entry);
             } while (cursor.moveToNext());

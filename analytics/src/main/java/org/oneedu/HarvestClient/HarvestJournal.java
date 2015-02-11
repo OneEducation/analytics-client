@@ -17,7 +17,7 @@
  * USA
  */
 
-package org.OneEducation.HarvestClient;
+package org.oneedu.HarvestClient;
 
 import java.lang.Long;
 import java.lang.Integer;
@@ -30,9 +30,9 @@ import java.util.ArrayList;
 import android.util.Log;
 import android.content.Context;
 
-import org.OneEducation.HarvestClient.HarvestSettings;
-import org.OneEducation.HarvestClient.HarvestStore;
-import org.OneEducation.HarvestClient.HarvestEntry;
+import org.oneedu.HarvestClient.HarvestSettings;
+import org.oneedu.HarvestClient.HarvestStore;
+import org.oneedu.HarvestClient.HarvestEntry;
 
 
 public class HarvestJournal {

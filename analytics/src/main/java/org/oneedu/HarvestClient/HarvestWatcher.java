@@ -17,7 +17,7 @@
  * USA
  */
 
-package org.OneEducation.HarvestClient;
+package org.oneedu.HarvestClient;
 
 import java.lang.Integer;
 import java.lang.Long;
@@ -34,12 +34,12 @@ import android.content.ComponentName;
 import android.app.ActivityManager;
 import android.app.ActivityManager.RunningTaskInfo;
 
-import org.OneEducation.HarvestClient.HarvestJournal;
-import org.OneEducation.HarvestClient.HarvestReporter;
-import org.OneEducation.HarvestClient.HarvestEntry;
-import org.OneEducation.HarvestClient.HarvestTrafficStats;
-import org.OneEducation.HarvestClient.HarvestTrafficJournal;
-import org.OneEducation.HarvestClient.HarvestTrafficEntry;
+import org.oneedu.HarvestClient.HarvestJournal;
+import org.oneedu.HarvestClient.HarvestReporter;
+import org.oneedu.HarvestClient.HarvestEntry;
+import org.oneedu.HarvestClient.HarvestTrafficStats;
+import org.oneedu.HarvestClient.HarvestTrafficJournal;
+import org.oneedu.HarvestClient.HarvestTrafficEntry;
 
 public class HarvestWatcher implements Runnable {
 

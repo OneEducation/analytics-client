@@ -17,35 +17,22 @@
  * USA
  */
 
-package org.OneEducation.HarvestClient;
+package org.oneedu.HarvestClient;
 
-import android.app.Activity;
-import android.os.Bundle;
 import android.content.Intent;
-import android.view.View;
+import android.content.Context;
+import android.content.BroadcastReceiver;
 
-public class HarvestActivity extends Activity
+import org.oneedu.HarvestClient.HarvestService;
+
+
+public class HarvestReceiver extends BroadcastReceiver
 {
-    /** Called when the activity is first created. */
     @Override
-    public void onCreate(Bundle savedInstanceState)
-    {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);
-
-        View okButton = findViewById(R.id.okbutton);
-        okButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
-
-        launchService();
-    }
-
-    private void launchService(){
-        Intent serviceIntent = new Intent(this, HarvestService.class);
-        startService(serviceIntent);
+    public void onReceive(Context context, Intent intent) {
+        if (Intent.ACTION_BOOT_COMPLETED.equals(intent.getAction()) || Intent.ACTION_MY_PACKAGE_REPLACED.equals(intent.getAction())) {
+            Intent serviceIntent = new Intent(context, HarvestService.class);
+            context.startService(serviceIntent);
+        }
     }
 }

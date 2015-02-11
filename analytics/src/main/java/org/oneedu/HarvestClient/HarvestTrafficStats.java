@@ -17,7 +17,7 @@
  * USA
  */
 
-package org.OneEducation.HarvestClient;
+package org.oneedu.HarvestClient;
 
 import java.lang.Long;
 import java.io.BufferedReader;

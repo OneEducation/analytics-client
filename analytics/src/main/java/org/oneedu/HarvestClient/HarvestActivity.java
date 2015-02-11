@@ -17,26 +17,35 @@
  * USA
  */
 
-package org.OneEducation.HarvestClient;
+package org.oneedu.HarvestClient;
 
-import java.lang.Long;
-import java.lang.String;
-import java.lang.System;
+import android.app.Activity;
+import android.os.Bundle;
+import android.content.Intent;
+import android.view.View;
 
+public class HarvestActivity extends Activity
+{
+    /** Called when the activity is first created. */
+    @Override
+    public void onCreate(Bundle savedInstanceState)
+    {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.main);
 
-class HarvestEntry {
+        View okButton = findViewById(R.id.okbutton);
+        okButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
-    public String packageName;
-    public Long started;
-    public Long duration;
-
-    HarvestEntry (String _packageName) {
-        packageName = _packageName;
-        started = 0L;
-        duration = 0L;
+        launchService();
     }
 
-    public void increment(Long delta) {
-        duration += delta;
+    private void launchService(){
+        Intent serviceIntent = new Intent(this, HarvestService.class);
+        startService(serviceIntent);
     }
 }
