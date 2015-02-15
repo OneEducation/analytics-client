@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 Martin Abente Lahaye - martin.abente.lahaye@gmail.com.
+ * Copyright (C) 2015 Martin Abente Lahaye - martin.abente.lahaye@gmail.com.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,26 +17,20 @@
  * USA
  */
 
-package org.oneedu.HarvestClient;
+package org.OneEducation.HarvestClient;
 
 import java.lang.Long;
-import java.lang.String;
-import java.lang.System;
 
 
-class HarvestEntry {
+class HarvestTrafficEntry {
 
-    public String packageName;
     public Long started;
-    public Long duration;
+    public Long received;
+    public Long transmitted;
 
-    HarvestEntry (String _packageName) {
-        packageName = _packageName;
+    HarvestTrafficEntry () {
         started = 0L;
-        duration = 0L;
-    }
-
-    public void increment(Long delta) {
-        duration += delta;
+        received = 0L;
+        transmitted = 0L;
     }
 }

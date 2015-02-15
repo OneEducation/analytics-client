@@ -17,7 +17,7 @@
  * USA
  */
 
-package org.oneedu.HarvestClient;
+package org.OneEducation.HarvestClient;
 
 import java.lang.System;
 
@@ -29,7 +29,7 @@ import android.content.Context;
 import android.app.Service;
 import android.app.Notification;
 
-import org.oneedu.HarvestClient.HarvestWatcher;
+import org.OneEducation.HarvestClient.HarvestWatcher;
 
 
 public class HarvestService extends Service {

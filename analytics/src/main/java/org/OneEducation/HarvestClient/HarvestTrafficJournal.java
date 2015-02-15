@@ -17,7 +17,7 @@
  * USA
  */
 
-package org.oneedu.HarvestClient;
+package org.OneEducation.HarvestClient;
 
 import java.lang.Long;
 import java.util.List;
@@ -25,9 +25,9 @@ import java.util.List;
 import android.util.Log;
 import android.content.Context;
 
-import org.oneedu.HarvestClient.HarvestSettings;
-import org.oneedu.HarvestClient.HarvestTrafficStore;
-import org.oneedu.HarvestClient.HarvestTrafficEntry;
+import org.OneEducation.HarvestClient.HarvestSettings;
+import org.OneEducation.HarvestClient.HarvestTrafficStore;
+import org.OneEducation.HarvestClient.HarvestTrafficEntry;
 
 
 class HarvestTrafficJournal {

@@ -17,7 +17,7 @@
  * USA
  */
 
-package org.oneedu.HarvestClient;
+package org.OneEducation.HarvestClient;
 
 import java.lang.String;
 import java.lang.Boolean;
@@ -47,7 +47,7 @@ import org.apache.http.conn.scheme.Scheme;
 import org.apache.http.conn.scheme.SchemeRegistry;
 import org.apache.http.impl.conn.SingleClientConnManager;
 
-import org.oneedu.HarvestClient.HarvestSettings;
+import org.OneEducation.HarvestClient.HarvestSettings;
 
 
 class HarvestReporterTask extends AsyncTask<String, Void, Boolean> {

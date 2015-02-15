@@ -17,7 +17,7 @@
  * USA
  */
 
-package org.oneedu.HarvestClient;
+package org.OneEducation.HarvestClient;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -42,10 +42,10 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONException;
 
-import org.oneedu.HarvestClient.HarvestSettings;
-import org.oneedu.HarvestClient.HarvestEntry;
-import org.oneedu.HarvestClient.HarvestReporterTask;
-import org.oneedu.HarvestClient.HarvestTrafficEntry;
+import org.OneEducation.HarvestClient.HarvestSettings;
+import org.OneEducation.HarvestClient.HarvestEntry;
+import org.OneEducation.HarvestClient.HarvestReporterTask;
+import org.OneEducation.HarvestClient.HarvestTrafficEntry;
 
 public class HarvestReporter {
 

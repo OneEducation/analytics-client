@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-      package="org.oneedu.HarvestClient"
+      package="org.OneEducation.HarvestClient"
       android:versionCode="1"
       android:versionName="30.0">
 
@@ -23,7 +23,7 @@
         </activity>
 
         <service
-            android:name="org.oneedu.HarvestClient.HarvestService"
+            android:name="org.OneEducation.HarvestClient.HarvestService"
             android:label="HarvestService">
             <intent-filter>
                 <action android:name="org.OneEducation.HarvestClient.HarvestService" />
@@ -32,7 +32,7 @@
 
         <receiver
             android:enabled="true"
-            android:name="org.oneedu.HarvestClient.HarvestReceiver"
+            android:name="org.OneEducation.HarvestClient.HarvestReceiver"
             android:permission="android.permission.RECEIVE_BOOT_COMPLETED">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />

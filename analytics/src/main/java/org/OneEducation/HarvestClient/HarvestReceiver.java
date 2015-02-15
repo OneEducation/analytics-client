@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 Martin Abente Lahaye - martin.abente.lahaye@gmail.com.
+ * Copyright (C) 2014 Martin Abente Lahaye - martin.abente.lahaye@gmail.com.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,20 +17,22 @@
  * USA
  */
 
-package org.oneedu.HarvestClient;
+package org.OneEducation.HarvestClient;
 
-import java.lang.Long;
+import android.content.Intent;
+import android.content.Context;
+import android.content.BroadcastReceiver;
+
+import org.OneEducation.HarvestClient.HarvestService;
 
 
-class HarvestTrafficEntry {
-
-    public Long started;
-    public Long received;
-    public Long transmitted;
-
-    HarvestTrafficEntry () {
-        started = 0L;
-        received = 0L;
-        transmitted = 0L;
+public class HarvestReceiver extends BroadcastReceiver
+{
+    @Override
+    public void onReceive(Context context, Intent intent) {
+        if (Intent.ACTION_BOOT_COMPLETED.equals(intent.getAction()) || Intent.ACTION_MY_PACKAGE_REPLACED.equals(intent.getAction())) {
+            Intent serviceIntent = new Intent(context, HarvestService.class);
+            context.startService(serviceIntent);
+        }
     }
 }
