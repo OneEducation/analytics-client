@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Analytics</string>
+    <string name="copy">"In order to support on-going efforts to improve the One Education mission and create\n a better experience for our users, One Education receives aggregated usage statistics\n from this device via the XO-analytics (beta) application.
+
+We collect anonymous usage data in an aggregated form to protect user privacy.
+
+Data collected:\nDevice serial, build and kernel number\nData upload / download figures\nTime spent using apps\nApp titles"</string>
+</resources>
