@@ -19,18 +19,12 @@
 
 package org.OneEducation.HarvestClient;
 
-import java.lang.System;
-
 import android.R;
 import android.util.Log;
 import android.os.IBinder;
 import android.content.Intent;
-import android.content.Context;
 import android.app.Service;
 import android.app.Notification;
-
-import org.OneEducation.HarvestClient.HarvestWatcher;
-
 
 public class HarvestService extends Service {
 
@@ -40,7 +34,7 @@ public class HarvestService extends Service {
     public void onCreate() {
         Log.i("HarvestService", "created");
         watcher = new HarvestWatcher(this);
-        watcher.run();
+        watcher.startHarvest();
         letTheUserKnow();
     }
 
