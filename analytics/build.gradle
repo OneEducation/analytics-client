@@ -1,25 +1,30 @@
 apply plugin: 'com.android.application'
 android {
     signingConfigs {
-        release {
+        system {
             keyAlias 'OneEdu'
             keyPassword 'Olpcau2015'
             storeFile file('/Users/dongseok0/org.oneedu.signing_key.jks')
             storePassword 'Olpcau2015'
         }
     }
-    compileSdkVersion 18
+    compileSdkVersion 22
     buildToolsVersion "21.1.2"
     defaultConfig {
         applicationId "org.OneEducation.HarvestClient"
         minSdkVersion 18
-        targetSdkVersion 18
+        targetSdkVersion 22
+        versionCode 310
+        versionName "31.0"
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
-            signingConfig signingConfigs.release
+            signingConfig signingConfigs.system
+        }
+        debug {
+            signingConfig signingConfigs.system
         }
     }
 }
