@@ -28,18 +28,13 @@ import java.lang.String;
 import java.lang.Runnable;
 
 import android.os.Handler;
+import android.os.HandlerThread;
+import android.os.Process;
 import android.util.Log;
 import android.content.Context;
 import android.content.ComponentName;
 import android.app.ActivityManager;
 import android.app.ActivityManager.RunningTaskInfo;
-
-import org.OneEducation.HarvestClient.HarvestJournal;
-import org.OneEducation.HarvestClient.HarvestReporter;
-import org.OneEducation.HarvestClient.HarvestEntry;
-import org.OneEducation.HarvestClient.HarvestTrafficStats;
-import org.OneEducation.HarvestClient.HarvestTrafficJournal;
-import org.OneEducation.HarvestClient.HarvestTrafficEntry;
 
 public class HarvestWatcher implements Runnable {
 
@@ -53,13 +48,15 @@ public class HarvestWatcher implements Runnable {
     private HarvestReporter reporter;
     private Handler handler;
     private Context context;
+    private HandlerThread thread = new HandlerThread("HarvestThread", Process.THREAD_PRIORITY_BACKGROUND);
 
     public HarvestWatcher(Context _context){
         Log.d("HarvestWatcher", "created");
 
         journal = new HarvestJournal(_context);
         reporter = new HarvestReporter(_context);
-        handler =  new Handler();
+        thread.start();
+        handler =  new Handler(thread.getLooper());
         context = _context;
 
         // discard initial values because we can not make any
@@ -72,6 +69,11 @@ public class HarvestWatcher implements Runnable {
         trafficJournal = new HarvestTrafficJournal(_context, initialRx, initialTx);
     }
 
+    public void startHarvest() {
+        handler.post(this);
+    }
+
+    @Override
     public void run(){
         Log.d("HarvestWatcher", "run");
 
@@ -91,6 +93,7 @@ public class HarvestWatcher implements Runnable {
         handler.removeCallbacks(this);
         journal.dump();
         trafficJournal.dump();
+        thread.quitSafely();
     }
 
     private void persistActivity() {
